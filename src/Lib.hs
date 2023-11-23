@@ -8,6 +8,8 @@ module Lib
     length',
     removeNonUppercase,
     nestedLists,
+    triples,
+    rightTriangles,
   )
 where
 
@@ -40,3 +42,9 @@ removeNonUppercase xs = [x | x <- xs, x `elem` ['A' .. 'Z']]
 
 nestedLists :: [[Integer]] -> [[Integer]]
 nestedLists xss = [[x | x <- xs, even x] | xs <- xss]
+
+triples :: [(Integer, Integer, Integer)]
+triples = [(a, b, c) | a <- [1 .. 10], b <- [1 .. 10], c <- [1 .. 10]]
+
+rightTriangles :: [(Integer, Integer, Integer)]
+rightTriangles = [(a, b, c) | a <- [1 .. 10], b <- [1 .. 10], c <- [1 .. 10], a * a + b * b == c * c, a + b + c == 24]
