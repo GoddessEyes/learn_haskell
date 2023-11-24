@@ -10,6 +10,9 @@ module Lib
     nestedLists,
     triples,
     rightTriangles,
+    factorial,
+    circumference,
+    circumference',
   )
 where
 
@@ -48,3 +51,13 @@ triples = [(a, b, c) | a <- [1 .. 10], b <- [1 .. 10], c <- [1 .. 10]]
 
 rightTriangles :: [(Integer, Integer, Integer)]
 rightTriangles = [(a, b, c) | a <- [1 .. 10], b <- [1 .. 10], c <- [1 .. 10], a * a + b * b == c * c, a + b + c == 24]
+
+
+factorial :: Integer -> Integer
+factorial n = product [1..n]
+
+circumference :: Float -> Float
+circumference r = 2 * pi * r
+
+circumference' :: Double -> Double
+circumference'  r = 2 * pi * r
