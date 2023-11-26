@@ -1,4 +1,20 @@
-module Ch3 (lucky, factorial, addVectors, first, second, third, pairs, head', tell, bmiTell, max', myCompare) where
+module Ch3
+  ( lucky,
+    factorial,
+    addVectors,
+    first,
+    second,
+    third,
+    pairs,
+    head',
+    tell,
+    bmiTell,
+    max',
+    myCompare,
+    calcBmis,
+    cylinder,
+  )
+where
 
 lucky :: Integer -> String
 lucky 7 = "Luck"
@@ -36,12 +52,12 @@ tell [x] = "One elem in list " ++ show x
 tell [x, y] = "Two elem in list " ++ show x ++ " and " ++ show y
 tell (x : y : _) = "More then two elem in list. First two elems: " ++ show x ++ " and " ++ show y
 
-bmiTell :: Double -> Double -> String
-bmiTell weight height
-  | weight / height ^ 2 <= 18.5 = "Тощий"
-  | weight / height ^ 2 <= 25.0 = "Норма"
-  | weight / height ^ 2 <= 30.0 = "Полнота"
-  | otherwise = "Лишний вес"
+--bmiTell :: Double -> Double -> String
+--bmiTell weight height
+--  | weight / height ^ 2 <= 18.5 = "Тощий"
+--  | weight / height ^ 2 <= 25.0 = "Норма"
+--  | weight / height ^ 2 <= 30.0 = "Полнота"
+--  | otherwise = "Лишний вес"
 
 max' :: (Ord a) => a -> a -> a
 max' a b
@@ -53,3 +69,27 @@ myCompare a b
   | a == b = EQ
   | a >= b = GT
   | otherwise = LT
+
+bmiTell :: Double -> Double -> String
+bmiTell weight height
+  | bmi <= skinny = "Тощий"
+  | bmi <= normal = "Норма"
+  | bmi <= fat = "Полнота"
+  | otherwise = "Лишний вес"
+  where
+    bmi = weight / height * height
+    (skinny, normal, fat) = (18.5, 25.0, 30.0)
+
+--calcBmis :: [(Double, Double)] -> [Double]
+--calcBmis bmis = [bmi w h | (w, h) <- bmis]
+--  where
+--    bmi weight height = weight / height * height
+
+cylinder :: Double -> Double -> Double
+cylinder r h =
+  let sideArea = 2 * pi * r * h
+      topArea = pi * r * r
+   in sideArea + 2 * topArea
+
+calcBmis :: [(Double, Double)] -> [Double]
+calcBmis bmis = [bmi | (w, h) <- bmis, let bmi = w / h * h, bmi > 25.0]
