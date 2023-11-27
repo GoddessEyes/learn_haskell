@@ -27,6 +27,7 @@ library
   exposed-modules:
       Ch3
       Ch4
+      Ch5
       Lib
   other-modules:
       Paths_learn_haskell
