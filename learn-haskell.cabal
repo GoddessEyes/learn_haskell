@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Ch3
+      Ch4
       Lib
   other-modules:
       Paths_learn_haskell
