@@ -1,4 +1,4 @@
-module Ch5 (multThree, compareWithHundred) where
+module Ch5 (multThree, compareWithHundred, dividedByTen, applyTwice, zipWith') where
 
 multThree :: Int -> Int -> Int -> Int
 multThree x y z = x * y * z
@@ -9,3 +9,15 @@ multThree x y z = x * y * z
 compareWithHundred :: Int -> Ordering
 --compareWithHundred x = x `compare` 100
 compareWithHundred = compare 100
+
+dividedByTen :: (Floating a) => a -> a
+dividedByTen = (/10)
+
+applyTwice :: (a -> a) -> a -> a
+applyTwice f x = f (f x)
+
+--(+) [1,2,3] [4,5,6]
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith' _ [] _ = []
+zipWith' _ _ [] = []
+zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
