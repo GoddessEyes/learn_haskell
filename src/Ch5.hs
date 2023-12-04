@@ -9,6 +9,11 @@ module Ch5
     largestDivisible,
     chain,
     numLongChains,
+    lNumLongChains,
+    lFlip,
+    sum',
+    elem',
+    map',
   )
 where
 
@@ -69,3 +74,20 @@ chain n
 numLongChains :: Int
 numLongChains = length (filter isLong (map chain [1..100]))
   where isLong xs = length xs > 15
+
+
+lNumLongChains :: Int
+lNumLongChains = length (filter (\xs -> length xs > 15) (map chain [1..100]))
+
+lFlip :: (a -> b -> c) -> b -> a -> c
+lFlip f = \x y -> f y x
+
+sum' :: (Num a) => [a] -> a
+sum' = foldl ((+)) 0
+
+elem' :: (Eq a) => a -> [a] -> Bool
+elem' y ys = foldl (\acc x -> if x == y then True else acc) False ys
+
+-- map' (\x -> x + 1) [1,2,3] || map' (+1) [1,2,3]
+map' :: (a -> b) -> [a] -> [b]
+map' f xs = foldr (\x acc -> f x : acc) [] xs
