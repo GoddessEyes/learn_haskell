@@ -28,6 +28,7 @@ library
       Ch3
       Ch4
       Ch5
+      Ch6
       Lib
   other-modules:
       Paths_learn_haskell

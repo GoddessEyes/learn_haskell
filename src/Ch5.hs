@@ -14,7 +14,11 @@ module Ch5
     sum',
     elem',
     map',
-    maximum'
+    maximum',
+    twExs,
+    filter',
+    product',
+    reverse'
   )
 where
 
