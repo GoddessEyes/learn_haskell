@@ -14,6 +14,7 @@ module Ch5
     sum',
     elem',
     map',
+    maximum'
   )
 where
 
@@ -91,3 +92,31 @@ elem' y ys = foldl (\acc x -> if x == y then True else acc) False ys
 -- map' (\x -> x + 1) [1,2,3] || map' (+1) [1,2,3]
 map' :: (a -> b) -> [a] -> [b]
 map' f xs = foldr (\x acc -> f x : acc) [] xs
+
+maximum' :: (Ord a) => [a] -> a
+--maximum' xs = foldl1 (\x acc -> if x > acc then x else acc) xs
+
+maximum' = foldl1 max
+
+
+reverse' :: [a] -> [a]
+--reverse' = foldl (\acc x -> x : acc) []
+reverse' = foldl (flip (:)) []
+
+product' :: (Num a) => [a] -> a
+product' = foldl (*) 1
+
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' p = foldr (\x acc -> if p x then x : acc else acc) []
+
+last' :: [a] -> a
+last' = foldr1 (\acc x -> x)
+
+and' :: [Bool] -> Bool
+and' xs = foldr (&&) True xs
+
+sqrtSums :: Int
+sqrtSums = length (takeWhile (< 1000) (scanl1 (+) (map sqrt [1..]))) + 1
+
+oddSquareSum :: Integer
+oddSquareSum = sum . takeWhile (<10000) . filter odd $ map (^ 2) [1..]
