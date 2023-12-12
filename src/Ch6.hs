@@ -3,6 +3,11 @@ module Ch6
     wordsNum,
     isIn,
     encodeCesar,
+    firstTo,
+    firstTo40,
+    decodeCesar,
+    findKey',
+    phoneBook,
   )
 where
 
@@ -32,3 +37,18 @@ firstTo40 = find (\x -> digitSum x == 40) [1 ..]
 
 firstTo :: Int -> Maybe Int
 firstTo n = find (\x -> digitSum x == n) [1 ..]
+
+phoneBook :: [(String, String)]
+phoneBook =
+  [ ("Olya", "555"),
+    ("Zhenya", "666"),
+    ("katya", "555")
+  ]
+
+findKey' :: (Eq k) => k -> [(k, v)] -> Maybe v
+-- findKey key [] = Nothing
+-- findKey' key ((k, v) : xs)
+-- \| key == k = Just v
+-- \| otherwise = findKey' key xs
+
+findKey' key = foldr (\(k, v) acc -> if key == k then Just v else acc) Nothing
