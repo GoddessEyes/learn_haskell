@@ -8,11 +8,14 @@ module Ch6
     decodeCesar,
     findKey',
     phoneBook,
+    phoneBook',
+    string2digits,
   )
 where
 
-import Data.Char (chr, digitToInt, ord)
+import Data.Char (chr, digitToInt, isDigit, ord)
 import Data.List (find, group, isPrefixOf, nub, sort, tails)
+import qualified Data.Map as Map
 
 numUniques :: (Eq a) => [a] -> Int
 numUniques = length . nub
@@ -38,17 +41,28 @@ firstTo40 = find (\x -> digitSum x == 40) [1 ..]
 firstTo :: Int -> Maybe Int
 firstTo n = find (\x -> digitSum x == n) [1 ..]
 
-phoneBook :: [(String, String)]
-phoneBook =
+phoneBook' :: [(String, String)]
+phoneBook' =
   [ ("Olya", "555"),
     ("Zhenya", "666"),
     ("katya", "555")
   ]
 
 findKey' :: (Eq k) => k -> [(k, v)] -> Maybe v
+
 -- findKey key [] = Nothing
 -- findKey' key ((k, v) : xs)
--- \| key == k = Just v
--- \| otherwise = findKey' key xs
 
+-- | key == k = Just v
+-- | otherwise = findKey' key xs
 findKey' key = foldr (\(k, v) acc -> if key == k then Just v else acc) Nothing
+
+phoneBook :: Map.Map String String
+phoneBook =
+  Map.fromList $
+    [ ("test", "123-123"),
+      ("test1", "234-234")
+    ]
+
+string2digits :: String -> [Int]
+string2digits = map digitToInt . filter isDigit
