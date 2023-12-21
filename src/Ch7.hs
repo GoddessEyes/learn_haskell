@@ -33,7 +33,10 @@ data Person = Person { firstName :: String
                      , age :: Int
                      , height :: Float
                      , phoneNumber :: String
-                     , flavor :: String } deriving (Show)
+                     , flavor :: String } deriving (Show, Eq, Read)
+
+
+
 
 data Car = Car { company :: String
                , model :: String
@@ -51,4 +54,33 @@ scalarProd :: (Num a) => Vector a -> Vector a -> a
 
 vmult :: (Num a) => Vector a -> a -> Vector a
 (Vector i j k) `vmult` m = Vector (i * m) (j * m) (k * m)
+
+-- mysteryDude = "Person { firstName =\"Michael\"" ++
+--                       ", lastName =\"Diamond\"" ++ 
+--                       ", age = 43}"
+--
+--
+-- readedPerson = read mysteryDude :: Person 
+--
+
+-- ghci> minBound :: Day 
+-- Mon
+-- ghci> maxBound :: Day 
+-- Sun
+data Day = Mon | Tue | Wed | Thu | Fri | Sat | Sun 
+  deriving (
+    Eq, 
+    Ord, 
+    Show, 
+    Read, 
+    Bounded, 
+    Enum
+  )
+
+type Name = String
+type PhoneNumber = String
+type PhoneBook = [(Name, PhoneNumber)]
+
+inPhoneBook :: Name -> PhoneNumber -> PhoneBook -> Bool
+inPhoneBook name phone phoneBook = (name, phone) `elem` phoneBook
 
