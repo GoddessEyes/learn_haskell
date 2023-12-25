@@ -8,6 +8,8 @@ module Ch7
   )
 where
 
+import qualified Data.Map as Map
+
 data Point = Point Float Float deriving (Show)
 
 data Shape = Circle Point Float | Rectangle Point Point
@@ -83,4 +85,25 @@ type PhoneBook = [(Name, PhoneNumber)]
 
 inPhoneBook :: Name -> PhoneNumber -> PhoneBook -> Bool
 inPhoneBook name phone phoneBook = (name, phone) `elem` phoneBook
+
+-- type AssocList k v = [(k, v)]
+-- type IntMap v = Map Int v
+
+data LockerState = Taken | Free deriving (Show, Eq)
+
+type Code = String
+type LockerMap = Map.Map Int (LockerState, Code) 
+
+lockerLookup :: Int -> LockerMap -> Either String Code
+lockerLookup  lockerNumber map =
+  case Map.lookup lockerNumber map of
+    Nothing -> Left $ "Locker # " ++ show lockerNumber ++ " not exist"
+    Just (state, code) ->
+      if state /= Taken then Right code else Left $ "Locker # " ++ show lockerNumber ++ " taken"
+
+lockers :: LockerMap
+lockers = Map.fromList
+  [(100, (Taken, "ZD39I"))
+  ,(101, (Free, "QWE3R"))
+  ]
 
