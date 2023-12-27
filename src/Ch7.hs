@@ -8,7 +8,7 @@ module Ch7
   )
 where
 
-import qualified Data.Map as Map
+import Data.Map qualified as Map
 
 data Point = Point Float Float deriving (Show)
 
@@ -30,57 +30,60 @@ baseCircle r = Circle (Point 0 0) r
 baseRect :: Float -> Float -> Shape
 baseRect width height = Rectangle (Point 0 0) (Point width height)
 
-data Person = Person { firstName :: String
-                     , lastName :: String
-                     , age :: Int
-                     , height :: Float
-                     , phoneNumber :: String
-                     , flavor :: String } deriving (Show, Eq, Read)
+data Person = Person
+  { firstName :: String,
+    lastName :: String,
+    age :: Int,
+    height :: Float,
+    phoneNumber :: String,
+    flavor :: String
+  }
+  deriving (Show, Eq, Read)
 
-
-
-
-data Car = Car { company :: String
-               , model :: String
-               , year :: Int
-               } deriving (Show)
-
+data Car = Car
+  { company :: String,
+    model :: String,
+    year :: Int
+  }
+  deriving (Show)
 
 data Vector a = Vector a a a deriving (Show)
+
 vplus :: (Num a) => Vector a -> Vector a -> Vector a
 (Vector i j k) `vplus` (Vector l m n) = Vector (i + l) (j + m) (k + n)
 
 scalarProd :: (Num a) => Vector a -> Vector a -> a
 (Vector i j k) `scalarProd` (Vector l m n) = i * l + j * m + k * n
 
-
 vmult :: (Num a) => Vector a -> a -> Vector a
 (Vector i j k) `vmult` m = Vector (i * m) (j * m) (k * m)
 
 -- mysteryDude = "Person { firstName =\"Michael\"" ++
---                       ", lastName =\"Diamond\"" ++ 
+--                       ", lastName =\"Diamond\"" ++
 --                       ", age = 43}"
 --
 --
--- readedPerson = read mysteryDude :: Person 
+-- readedPerson = read mysteryDude :: Person
 --
 
--- ghci> minBound :: Day 
+-- ghci> minBound :: Day
 -- Mon
--- ghci> maxBound :: Day 
+-- ghci> maxBound :: Day
 -- Sun
-data Day = Mon | Tue | Wed | Thu | Fri | Sat | Sun 
-  deriving (
-    Eq, 
-    Ord, 
-    Show, 
-    Read, 
-    Bounded, 
-    Enum
-  )
+data Day = Mon | Tue | Wed | Thu | Fri | Sat | Sun
+  deriving
+    ( Eq,
+      Ord,
+      Show,
+      Read,
+      Bounded,
+      Enum
+    )
 
 type Name = String
+
 type PhoneNumber = String
+
 type PhoneBook = [(Name, PhoneNumber)]
 
 inPhoneBook :: Name -> PhoneNumber -> PhoneBook -> Bool
@@ -92,18 +95,37 @@ inPhoneBook name phone phoneBook = (name, phone) `elem` phoneBook
 data LockerState = Taken | Free deriving (Show, Eq)
 
 type Code = String
-type LockerMap = Map.Map Int (LockerState, Code) 
+
+type LockerMap = Map.Map Int (LockerState, Code)
 
 lockerLookup :: Int -> LockerMap -> Either String Code
-lockerLookup  lockerNumber map =
+lockerLookup lockerNumber map =
   case Map.lookup lockerNumber map of
     Nothing -> Left $ "Locker # " ++ show lockerNumber ++ " not exist"
     Just (state, code) ->
       if state /= Taken then Right code else Left $ "Locker # " ++ show lockerNumber ++ " taken"
 
 lockers :: LockerMap
-lockers = Map.fromList
-  [(100, (Taken, "ZD39I"))
-  ,(101, (Free, "QWE3R"))
-  ]
+lockers =
+  Map.fromList
+    [ (100, (Taken, "ZD39I")),
+      (101, (Free, "QWE3R"))
+    ]
 
+-- data List a = Empty | Cons {listHead :: a, listTail :: List a} deriving (Show, Read, Eq, Ord)
+
+infixr 5 :-:
+
+-- 3 :-: (4 :-: (5 :-: Empty))
+data List a = Empty | a :-: (List a) deriving (Show, Read, Eq, Ord)
+
+infixr 5 ^++
+
+(^++) :: List a -> List a -> List a
+Empty ^++ ys = ys
+(x :-: xs) ^++ ys = x :-: (xs ^++ ys)
+
+--
+-- ghci> let a = 3 :-: 4 :-: Empty
+-- ghci> let b = 6 :-: 5 :-: Empty
+-- ghci> a ^++ b
