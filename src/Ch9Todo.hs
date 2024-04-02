@@ -3,11 +3,13 @@ import Data.List
 import System.Directory
 import System.Environment
 import System.IO
+import System.Random
 
 dispatch :: String -> [String] -> IO ()
 dispatch "add" = add
 dispatch "view" = view
 dispatch "remove" = remove
+dispatch command = doesntExist command
 
 add :: [String] -> IO ()
 add [fileName, todoItem] = appendFile fileName (todoItem ++ "\n")
@@ -41,6 +43,10 @@ remove [fileName, numberString] = do
         removeFile fileName
         renameFile tempName fileName
     )
+
+doesntExist :: String -> [String] -> IO ()
+doesntExist command _ =
+  putStrLn $ "Command " ++ command ++ "doesnt define"
 
 main :: IO ()
 main = do
