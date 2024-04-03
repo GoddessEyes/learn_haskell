@@ -8,7 +8,7 @@ module Ch7
   )
 where
 
-import Data.Map qualified as Map
+import qualified Data.Map as Map
 
 data Point = Point Float Float deriving (Show)
 
@@ -25,7 +25,7 @@ nudge (Rectangle (Point x1 y1) (Point x2 y2)) a b =
   Rectangle (Point (x1 + a) (y1 + b)) (Point (x2 + a) (y2 + b))
 
 baseCircle :: Float -> Shape
-baseCircle r = Circle (Point 0 0) r
+baseCircle = Circle (Point 0 0)
 
 baseRect :: Float -> Float -> Shape
 baseRect width height = Rectangle (Point 0 0) (Point width height)

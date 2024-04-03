@@ -12,8 +12,10 @@ where
 import Control.Monad
 import Data.Char
 
+main :: IO ()
 main = putStrLn "Hello world"
 
+reverseWords' :: IO ()
 reverseWords' = do
   line <- getLine
   if null line
@@ -25,6 +27,7 @@ reverseWords' = do
 reverseWords :: String -> String
 reverseWords = unwords . map reverse . words
 
+testWhenMonad :: IO ()
 testWhenMonad = do
   input <- getLine
   when (input == "test") $ do
@@ -38,17 +41,20 @@ testWhenMonad = do
 --   print [a, b, c]
 --
 
+testSequence :: IO ()
 testSequence = do
   rs <- sequence [getLine, getLine, getLine]
   print rs
 
 -- mapM print [1,2,3] & mapM_ print [1,2,3]
 
+testForever :: IO b
 testForever = forever $ do
   putStr "Input: "
   l <- getLine
   putStrLn $ map toUpper l
 
+colorAssoc :: IO [()]
 colorAssoc = do
   colors <-
     forM

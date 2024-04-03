@@ -1,9 +1,10 @@
+module Ch9Todo (start) where
+
 import Control.Exception
 import Data.List
 import System.Directory
 import System.Environment
 import System.IO
-import System.Random
 
 dispatch :: String -> [String] -> IO ()
 dispatch "add" = add
@@ -48,7 +49,7 @@ doesntExist :: String -> [String] -> IO ()
 doesntExist command _ =
   putStrLn $ "Command " ++ command ++ "doesnt define"
 
-main :: IO ()
-main = do
+start :: IO ()
+start = do
   (command : argList) <- getArgs
   dispatch command argList
