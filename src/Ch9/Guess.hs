@@ -1,4 +1,4 @@
-module Ch9Guess (run) where
+module Ch9.Guess (run) where
 
 import Control.Monad
 import System.Random (StdGen, getStdGen, randomR)

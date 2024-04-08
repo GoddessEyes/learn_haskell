@@ -31,8 +31,9 @@ library
       Ch6
       Ch7
       Ch8
-      Ch9
-      Ch9Guess
+      Ch9.Ch9
+      Ch9.CopyFile
+      Ch9.Guess
       Ch9Todo
       Geometry.Cube
       Geometry.Cuboid
@@ -47,6 +48,7 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-type-defaults
   build-depends:
       base >=4.7 && <5
+    , bytestring
     , containers
     , directory
     , random
@@ -63,6 +65,7 @@ executable learn-haskell-exe
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-type-defaults -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , bytestring
     , containers
     , directory
     , learn-haskell
@@ -81,6 +84,7 @@ test-suite learn-haskell-test
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-type-defaults -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , bytestring
     , containers
     , directory
     , learn-haskell

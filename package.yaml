@@ -24,6 +24,7 @@ dependencies:
 - containers
 - random
 - directory
+- bytestring
 
 ghc-options:
 - -Wall
