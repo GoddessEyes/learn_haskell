@@ -1,4 +1,4 @@
-module Ch9Todo (start, add, view, remove) where
+module Ch9.Todo (start, add, view, remove) where
 
 import Control.Exception
 import Data.List

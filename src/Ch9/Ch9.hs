@@ -8,7 +8,7 @@ module Ch9.Ch9
   )
 where
 
-import Data.List
+import qualified Data.List as List
 import System.Directory
 import System.IO
 import System.Random
@@ -37,7 +37,7 @@ removeTodo = do
   putStrLn "Remove number:"
   numberString <- getLine
   let number = read numberString
-      newTodoItems = unlines $ delete (todoTasks !! number) todoTasks
+      newTodoItems = unlines $ List.delete (todoTasks !! number) todoTasks
   (tempName, tempHandle) <- openTempFile "." "temp"
   hPutStr tempHandle newTodoItems
   hClose tempHandle

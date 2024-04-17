@@ -33,8 +33,9 @@ library
       Ch8
       Ch9.Ch9
       Ch9.CopyFile
+      Ch9.DivTwoNum
       Ch9.Guess
-      Ch9Todo
+      Ch9.Todo
       Geometry.Cube
       Geometry.Cuboid
       Geometry.Sphere

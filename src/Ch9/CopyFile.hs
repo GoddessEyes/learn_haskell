@@ -1,11 +1,12 @@
+module Ch9.CopyFile (main) where
+
 import Control.Exception
-import qualified Data.ByteString as S
 import qualified Data.ByteString.Lazy as B
-import Data.List
 import System.Directory
 import System.Environment
 import System.IO
 
+main :: IO ()
 main = do
   (fileName1 : fileName2 : _) <- getArgs
   copy fileName1 fileName2
@@ -25,4 +26,5 @@ copy source dest = do
         renameFile tempName dest
     )
 
+-- ghc -main-is Ch9.CopyFile src/Ch9/CopyFile.hs
 -- ./src/Ch9/CopyFile src/Ch9/bart.txt src/Ch9/bort.txt
