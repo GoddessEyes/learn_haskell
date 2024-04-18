@@ -25,6 +25,7 @@ source-repository head
 
 library
   exposed-modules:
+      Ch10.Ch10
       Ch3
       Ch4
       Ch5
