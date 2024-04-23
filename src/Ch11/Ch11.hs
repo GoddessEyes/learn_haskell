@@ -30,3 +30,6 @@ instance Functor CMaybe where
 
 myAction :: IO String
 myAction = (++) <$> getLine <*> getLine
+
+-- getZipList $ (+) <$> ZipList [1, 2, 3] <*> ZipList [100, 100, 100]
+--[101,102,103]
