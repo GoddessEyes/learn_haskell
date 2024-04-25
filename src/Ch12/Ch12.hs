@@ -1,7 +1,5 @@
 module Ch12.Ch12 where
 
-
-
 import Data.Monoid
 
 
@@ -32,3 +30,6 @@ productEx =
 sumEx :: Integer
 sumEx =
   getSum $ Sum 2 `mappend` Sum 9
+
+lengthCompare :: String -> String -> Ordering
+lengthCompare x y = (length x `compare` length y) `mappend` (x `compare` y)
