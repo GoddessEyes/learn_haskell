@@ -1,4 +1,4 @@
-module Ch13.Ch13 (applyMaybe) where
+module Ch13.Ch13 (applyMaybe, banana, landLeft, landRight, foo, pierRoutine, justFirst, wopwop) where
 
 -- (\x -> Just $ 1 + x) 1
 
@@ -36,3 +36,27 @@ banana _ = Nothing
 --Nothing
 -- return (0, 0) >>= landRight 2 >>= landLeft 2 >> Nothing >>= landRight 2
 --Nothing
+
+foo :: Maybe String
+foo = do
+  x <- Just 3
+  y <- Just "!"
+  Just (show x ++ y)
+
+pierRoutine :: Maybe Pole
+pierRoutine = do
+  let start = (0, 0)
+  first <- landLeft 2 start
+--  Nothing
+  second <- landRight 2 first
+  landLeft 1 second
+
+justFirst :: Maybe Char
+justFirst = do
+  (x:_) <- Just "Hello"
+  return x
+
+wopwop :: Maybe Char
+wopwop = do
+  (x:_) <- Just ""
+  return x
