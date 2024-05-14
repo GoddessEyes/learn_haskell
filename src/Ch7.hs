@@ -5,6 +5,12 @@ module Ch7
     nudge,
     baseCircle,
     baseRect,
+    yesnoIf,
+    lockers,
+    numsTree,
+    inPhoneBook,
+    treeInsert,
+    treeElem,
   )
 where
 
@@ -28,7 +34,7 @@ baseCircle :: Float -> Shape
 baseCircle = Circle (Point 0 0)
 
 baseRect :: Float -> Float -> Shape
-baseRect width height = Rectangle (Point 0 0) (Point width height)
+baseRect width height_ = Rectangle (Point 0 0) (Point width height_)
 
 data Person = Person
   { firstName :: String,
@@ -99,8 +105,8 @@ type Code = String
 type LockerMap = Map.Map Int (LockerState, Code)
 
 lockerLookup :: Int -> LockerMap -> Either String Code
-lockerLookup lockerNumber map =
-  case Map.lookup lockerNumber map of
+lockerLookup lockerNumber map_ =
+  case Map.lookup lockerNumber map_ of
     Nothing -> Left $ "Locker # " ++ show lockerNumber ++ " not exist"
     Just (state, code) ->
       if state /= Taken then Right code else Left $ "Locker # " ++ show lockerNumber ++ " taken"
@@ -119,11 +125,11 @@ infixr 5 :-:
 -- 3 :-: (4 :-: (5 :-: Empty))
 data List a = Empty | a :-: (List a) deriving (Show, Read, Eq, Ord)
 
-infixr 5 ^++
+--infixr 5 ^++
 
-(^++) :: List a -> List a -> List a
-Empty ^++ ys = ys
-(x :-: xs) ^++ ys = x :-: (xs ^++ ys)
+--(^++) :: List a -> List a -> List a
+--Empty ^++ ys = ys
+--(x :-: xs) ^++ ys = x :-: (xs ^++ ys)
 
 --
 -- ghci> let a = 3 :-: 4 :-: Empty
@@ -143,14 +149,16 @@ treeInsert x (Node a left right)
   | x > a = Node a left (treeInsert x right)
 
 treeElem :: (Ord a) => a -> Tree a -> Bool
-treeElem x EmptyTree = False
+treeElem _ EmptyTree = False
 treeElem x (Node a left right)
   | x == a = True
   | x < a = treeElem x left
   | x > a = treeElem x right
 
+nums :: [Integer]
 nums = [8, 6, 4, 1, 7, 3, 5]
 
+numsTree :: Tree Integer
 numsTree = foldr treeInsert EmptyTree nums
 
 -- 2
@@ -198,5 +206,5 @@ yesnoIf yesnoVal yesResult noResult =
   if yesno yesnoVal then yesResult else noResult
 
 instance Functor Tree where
-  fmap f EmptyTree = EmptyTree
+  fmap _ EmptyTree = EmptyTree
   fmap f (Node x left right) = Node (f x) (fmap f left) (fmap f right)

@@ -1,7 +1,7 @@
 module Ch9.Todo (start, add, view, remove) where
 
 import Control.Exception
-import Data.List
+import Data.List (delete)
 import System.Directory
 import System.Environment
 import System.IO

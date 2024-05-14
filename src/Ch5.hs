@@ -18,7 +18,8 @@ module Ch5
     twExs,
     filter',
     product',
-    reverse'
+    reverse',
+    last'
   )
 where
 

@@ -1,4 +1,4 @@
-module Ch13.Ch13 (applyMaybe, banana, landLeft, landRight, foo, pierRoutine, justFirst, wopwop) where
+module Ch13.Ch13 (applyMaybe, banana, landLeft, landRight, foo, pierRoutine, justFirst, wopwop, listOfTuples) where
 
 -- (\x -> Just $ 1 + x) 1
 
@@ -47,16 +47,24 @@ pierRoutine :: Maybe Pole
 pierRoutine = do
   let start = (0, 0)
   first <- landLeft 2 start
---  Nothing
+  --  Nothing
   second <- landRight 2 first
   landLeft 1 second
 
 justFirst :: Maybe Char
 justFirst = do
-  (x:_) <- Just "Hello"
+  (x : _) <- Just "Hello"
   return x
 
 wopwop :: Maybe Char
 wopwop = do
-  (x:_) <- Just ""
+  (x : _) <- Just ""
   return x
+
+-- [3,4,5] >>= \x -> [x, -x]
+-- [] >>= \_ -> [1, 2, 3]
+listOfTuples :: [(Int, String)]
+listOfTuples = do
+  n <- [1, 2]
+  ch <- ["a", "b"]
+  return (n, ch)
