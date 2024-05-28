@@ -1,4 +1,18 @@
-module Ch13.Ch13 (applyMaybe, banana, landLeft, landRight, foo, pierRoutine, justFirst, wopwop, listOfTuples) where
+module Ch13.Ch13
+  ( applyMaybe,
+    banana,
+    landLeft,
+    landRight,
+    foo,
+    pierRoutine,
+    justFirst,
+    wopwop,
+    listOfTuples,
+    sevensOnly,
+  )
+where
+
+import Control.Monad
 
 -- (\x -> Just $ 1 + x) 1
 
@@ -68,3 +82,15 @@ listOfTuples = do
   n <- [1, 2]
   ch <- ["a", "b"]
   return (n, ch)
+
+--λ> guard (5 > 2) :: Maybe ()
+--Just ()
+
+-- [1..50] >>= (\x -> guard ('7' `elem` show x) >> return x)
+
+-- [x | x <- [1..50], '7' `elem` show x]
+sevensOnly :: [Int]
+sevensOnly = do
+  x <- [1 .. 50]
+  guard ('7' `elem` show x)
+  return x

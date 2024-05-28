@@ -19,7 +19,7 @@ module Ch5
     filter',
     product',
     reverse',
-    last'
+    last',
   )
 where
 
@@ -78,12 +78,12 @@ chain n
   | odd n = n : chain (n * 3 + 1)
 
 numLongChains :: Int
-numLongChains = length (filter isLong (map chain [1..100]))
-  where isLong xs = length xs > 15
-
+numLongChains = length (filter isLong (map chain [1 .. 100]))
+  where
+    isLong xs = length xs > 15
 
 lNumLongChains :: Int
-lNumLongChains = length (filter (\xs -> length xs > 15) (map chain [1..100]))
+lNumLongChains = length (filter (\xs -> length xs > 15) (map chain [1 .. 100]))
 
 lFlip :: (a -> b -> c) -> b -> a -> c
 lFlip f = \x y -> f y x
@@ -103,7 +103,6 @@ maximum' :: (Ord a) => [a] -> a
 
 maximum' = foldl1 max
 
-
 reverse' :: [a] -> [a]
 --reverse' = foldl (\acc x -> x : acc) []
 reverse' = foldl (flip (:)) []
@@ -121,7 +120,7 @@ and' :: [Bool] -> Bool
 and' xs = foldr (&&) True xs
 
 sqrtSums :: Int
-sqrtSums = length (takeWhile (< 1000) (scanl1 (+) (map sqrt [1..]))) + 1
+sqrtSums = length (takeWhile (< 1000) (scanl1 (+) (map sqrt [1 ..]))) + 1
 
 oddSquareSum :: Integer
-oddSquareSum = sum . takeWhile (<10000) . filter odd $ map (^ 2) [1..]
+oddSquareSum = sum . takeWhile (< 10000) . filter odd $ map (^ 2) [1 ..]
