@@ -1,4 +1,4 @@
-module Ch14.Ch14 (isBigGang, addDrink, applyLog, multWithLog, multWithLog', gcd') where
+module Ch14.Ch14 (isBigGang, addDrink, applyLog, multWithLog, multWithLog', gcd', toDiffList, fromDiffList) where
 
 import Control.Monad.Writer
 import Data.Monoid
